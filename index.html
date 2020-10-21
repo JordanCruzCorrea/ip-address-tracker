@@ -1,34 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <title>Frontend Mentor | IP Address Tracker</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | IP Address Tracker</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper-container">
+      <header class="flex justify-center py-8">
+        <h1>
+          IP Address Tracker
+        </h1>
+      </header>
 
-  IP Address Tracker
+      <main class="flex flex-col items-center justify-center px-6">
+        <section class="flex items-center justify-center w-full relative">
+          <input
+            id="search"
+            class="rounded-2xl p-4 w-full"
+            placeholder="Search for any IP address or domain"
+          />
+          <button
+            id="searchBtn"
+            class="flex justify-center items-center absolute right-0 w-1/6 h-full bg-black rounded-tr-2xl rounded-br-2xl"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14">
+              <path
+                fill="none"
+                stroke="#FFF"
+                stroke-width="3"
+                d="M2 1l6 6-6 6"
+              />
+            </svg>
+          </button>
+        </section>
 
-  Search for any IP address or domain
+        <section class="w-full mt-6 relative">
+          <div
+            class="z-50 p-3 flex flex-col justify-evenly items-center text-center bg-white rounded-2xl md:flex-row"
+          >
+            <article class="map-info">
+              <h3>
+                IP Address
+              </h3>
+              <p id="ip"></p>
+            </article>
+            <article class="map-info">
+              <h3>
+                Location
+              </h3>
+              <p id="location"></p>
+            </article>
+            <article class="map-info">
+              <h3>
+                Timezone
+              </h3>
+              <p id="timezone"></p>
+            </article>
+            <article class="map-info">
+              <h3>
+                ISP
+              </h3>
+              <p id="isp"></p>
+            </article>
+          </div>
 
-  IP Address
-  Location
-  Timezone
-    UTC <!-- add offset value dynamically using the API -->
-  ISP
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+          <div class="z-0 w-screen fixed bottom-0 left-0" id="map"></div>
+        </section>
+      </main>
+
+      <div
+        class="attribution fixed bottom-0 left-0 bg-white flex flex-col items-center justify-center w-full"
+      >
+        <span>
+          Challenge by
+          <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+            >Frontend Mentor</a
+          > </span
+        ><span
+          >Coded by
+          <a href="https://www.jccdev.tech" target="_blank"
+            >Jordan Cruz-Correa</a
+          ></span
+        >
+      </div>
+    </div>
+  </body>
 </html>
