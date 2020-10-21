@@ -46,15 +46,19 @@
       </header>
 
       <main class="flex flex-col items-center justify-center px-6">
-        <section class="flex items-center justify-center w-full relative">
+        <form
+          class="flex items-center justify-center w-full relative md:w-2/5"
+          id="search-form"
+          onsubmit="fetchData(e)"
+        >
           <input
             id="search"
-            class="rounded-2xl p-4 w-full"
+            class="rounded-2xl p-4 w-full cursor-pointer"
             placeholder="Search for any IP address or domain"
           />
           <button
             id="searchBtn"
-            class="flex justify-center items-center absolute right-0 w-1/6 h-full bg-black rounded-tr-2xl rounded-br-2xl"
+            class="flex justify-center items-center absolute right-0 w-1/6 h-full bg-black rounded-tr-2xl rounded-br-2xl md:w-1/12"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14">
               <path
@@ -65,57 +69,41 @@
               />
             </svg>
           </button>
-        </section>
+        </form>
 
-        <section class="w-full mt-6 relative">
+        <section class="w-full mt-6 relative md:w-3/4">
           <div
-            class="z-50 p-3 flex flex-col justify-evenly items-center text-center bg-white rounded-2xl md:flex-row"
+            class="z-50 p-3 flex flex-col justify-evenly items-center text-center bg-white rounded-2xl md:flex-row md:py-6 md:px-4"
           >
-            <article class="map-info">
+            <article class="map-info md:flex-grow md:w-1/4 md:px-8">
               <h3>
                 IP Address
               </h3>
-              <p id="ip"></p>
+              <p id="ip">-</p>
             </article>
-            <article class="map-info">
+            <article class="map-info md:flex-grow md:border-l md:border-gray-300 md:px-8 md:w-1/4">
               <h3>
                 Location
               </h3>
-              <p id="location"></p>
+              <p id="location">-</p>
             </article>
-            <article class="map-info">
+            <article class="map-info md:flex-grow md:border-l md:border-r md:border-gray-300 md:px-8 md:w-1/4">
               <h3>
                 Timezone
               </h3>
-              <p id="timezone"></p>
+              <p id="timezone">-</p>
             </article>
-            <article class="map-info">
+            <article class="map-info md:flex-grow md:w-1/4 md:px-8">
               <h3>
                 ISP
               </h3>
-              <p id="isp"></p>
+              <p id="isp">-</p>
             </article>
           </div>
 
           <div class="z-0 w-screen fixed bottom-0 left-0" id="map"></div>
         </section>
       </main>
-
-      <div
-        class="attribution fixed bottom-0 left-0 bg-white flex flex-col items-center justify-center w-full"
-      >
-        <span>
-          Challenge by
-          <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-            >Frontend Mentor</a
-          > </span
-        ><span
-          >Coded by
-          <a href="https://www.jccdev.tech" target="_blank"
-            >Jordan Cruz-Correa</a
-          ></span
-        >
-      </div>
     </div>
   </body>
 </html>

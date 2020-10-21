@@ -2,13 +2,15 @@ const mapboxApiKey =
   "pk.eyJ1IjoiamNjZGV2NDUiLCJhIjoiY2tjcHd5ZTJnMGJhZzJxb3k4NGlpcnYwYiJ9._IJ_xwjFQnQbx3p1EXeu_g";
 const apiKey = "at_o4IbwYvg5Db1E5oQFA1JZfQbdVJHt";
 
+const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("search");
 const searchBtn = document.getElementById("searchBtn");
 const ipEl = document.getElementById("ip");
 const locationEl = document.getElementById("location");
 const timezoneEl = document.getElementById("timezone");
 const ispEl = document.getElementById("isp");
 
-let ipMap = L.map("map").setView([51.505, -0.09], 13);
+let ipMap = L.map("map").setView([40.5, -70.4], 13);
 
 L.tileLayer(
   `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxApiKey}`,
@@ -19,13 +21,20 @@ L.tileLayer(
     id: "mapbox/streets-v11",
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: "your.mapbox.access.token",
+    accessToken: mapboxApiKey,
   }
 ).addTo(ipMap);
 
-async function fetchData() {
+async function fetchData(e) {
+  e.preventDefault();
   try {
-    await fetch(`https://geo.ipify.org/api/v1?apiKey=${apiKey}`)
+    await fetch(
+      `https://geo.ipify.org/api/v1?apiKey=${apiKey}${
+        searchInput.value.charAt(searchInput.value.length - 1) == Number
+          ? `&ipAddress=${searchInput.value}`
+          : `&domain=${searchInput.value}`
+      }`
+    )
       .then((res) => res.json())
       .then((data) => renderData(data));
   } catch (error) {
@@ -34,8 +43,6 @@ async function fetchData() {
 }
 
 function renderData(data) {
-  console.log(data);
-
   let { ip, location, isp } = data;
   let { city, region, postalCode, timezone, lat, lng } = location;
 
@@ -48,10 +55,16 @@ function renderData(data) {
 }
 
 function handleMapClick(lat, lng) {
-  ipMap.setView([lat, lng])
-  return L.marker([lat, lng]).addTo(ipMap);
+  ipMap.setView([lat, lng]);
+  let icon = L.icon({
+    iconUrl: "./images/icon-location.svg",
+    // iconAnchor: [lat, lng],
+  });
+  return L.marker([lat, lng], { icon }).addTo(ipMap);
 }
 
 ipMap.on("click", handleMapClick);
 
 searchBtn.addEventListener("click", fetchData);
+
+window.addEventListener("load", fetchData);
